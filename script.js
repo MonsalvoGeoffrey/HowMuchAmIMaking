@@ -5,6 +5,12 @@ let earnedEl = document.getElementById('earned');
 let started = false;
 let startBtn = document.getElementById('start-btn');
 
+if (localStorage.getItem('startTime')) {
+    startTime = new Date(parseInt(localStorage.getItem('startTime')));
+    started = true;
+}
+
+
 startBtn.addEventListener('click', function () {
     startTime = new Date();
     started = true;
@@ -31,6 +37,8 @@ function update() {
     timeEl.innerHTML = `Total Time: <strong>${formattedHours}:${formattedMinutes}:${formattedSeconds}</strong>`;
     earnedEl.innerHTML = `Total Earned: <strong>$${Math.floor(value * time * 100) / 100}</strong>`;
     // timeEl.innerHTML += '<br>Total Hourly Rate: <strong>$' + Math.floor(value * time * 100) / 100 + "</strong>";
+
+    localStorage.setItem('startTime', startTime.getTime());
 }
 
 update();
